@@ -976,11 +976,15 @@ movies = [
     "banner_image": "https://images-na.ssl-images-amazon.com/images/M/MV5BNDc4MThhN2EtZjMzNC00ZDJmLThiZTgtNThlY2UxZWMzNjdkXkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_SX300.jpg"
   }
 ]
-@app.get("/movies")
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to the FastAPI Movies API!"}
+
+@app.get("/api/movies")
 def list_movies():
     return {"data": movies}
 
-@app.get("/movies/search")
+@app.get("/api/movies/search")
 def search_movies(title: str):
     results = [movie for movie in movies if title.lower() in movie["title"].lower()]
     if not results:
